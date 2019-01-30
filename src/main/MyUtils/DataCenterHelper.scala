@@ -35,7 +35,7 @@ class DataCenterHelper {
 
   private def createNewHost(myHostId: Int, ramSize: Int, storage: Int, bandWidth: Int, mips: Int): Host = {
 
-    val peList: List[Pe] = new Pe(0, new PeProvisionerSimple(mips))::Nil
+    val peList: List[Pe] = List(new Pe(0, new PeProvisionerSimple(mips)))
 
     new Host(myHostId, new RamProvisionerSimple(ramSize), new BwProvisionerSimple(bandWidth), storage, myUtil.toJList(peList), new VmSchedulerTimeShared(myUtil.toJList(peList)))
   }
@@ -78,24 +78,16 @@ class DataCenterHelper {
 
   }
 
-  def createVM(vmParams: Map[String, Any]) = {
-
-    new Vm(vmParams("vmId").asInstanceOf[Int], vmParams("brokerId").asInstanceOf[Int], vmParams("mips").asInstanceOf[Double], vmParams("pesNumber").asInstanceOf[Int], vmParams("ram").asInstanceOf[Int], vmParams("bw").asInstanceOf[Long], vmParams("size").asInstanceOf[Long], vmParams("vmm").asInstanceOf[String], new CloudletSchedulerTimeShared)
-
-  }
+  def createVM(vmParams: Map[String, Any]) = new Vm(vmParams("vmId").asInstanceOf[Int], vmParams("brokerId").asInstanceOf[Int], vmParams("mips").asInstanceOf[Double], vmParams("pesNumber").asInstanceOf[Int], vmParams("ram").asInstanceOf[Int], vmParams("bw").asInstanceOf[Long], vmParams("size").asInstanceOf[Long], vmParams("vmm").asInstanceOf[String], new CloudletSchedulerTimeShared)
 
 
   def createBroker(brokerName: String): DatacenterBroker = {
-
-    val dataCenterBroker: DatacenterBroker = new DatacenterBroker(brokerName);
-    dataCenterBroker
+    new DatacenterBroker(brokerName)
   }
 
 
   def createCloudLet(cloudLetProps: Map[String, Int], utilizationModel: UtilizationModel): Cloudlet = {
     val cloudlet = new Cloudlet(cloudLetProps("id"), cloudLetProps("length"), cloudLetProps("pesNumber"), cloudLetProps("fileSize"), cloudLetProps("outputSize"), utilizationModel, utilizationModel, utilizationModel)
-    cloudlet.setUserId(cloudLetProps("id"))
-    cloudlet.setVmId(cloudLetProps("id"))
     cloudlet
   }
 
