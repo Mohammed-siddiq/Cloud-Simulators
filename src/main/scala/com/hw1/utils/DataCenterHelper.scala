@@ -1,5 +1,9 @@
+package com.hw1.utils
+
 import java.text.DecimalFormat
 
+import com.hw1.simulations.FirstSimulator
+import com.hw1.simulations.FirstSimulator.conf
 import org.cloudbus.cloudsim._
 import org.cloudbus.cloudsim.provisioners.{BwProvisionerSimple, PeProvisionerSimple, RamProvisionerSimple}
 import org.slf4j.{Logger, LoggerFactory}
@@ -8,7 +12,7 @@ class DataCenterHelper {
 
   val logger: Logger = LoggerFactory.getLogger(FirstSimulator.getClass)
 
-  def printCloudLets(list: List[Nothing]) = {
+  def printCloudLets(list: List[Cloudlet]) = {
 
     val size = list.length
 
@@ -18,8 +22,7 @@ class DataCenterHelper {
     logger.info("Cloudlet ID" + indent + "STATUS" + indent + "Data center ID" + indent + "VM ID" + indent + "Time" + indent + "Start Time" + indent + "Finish Time")
 
     val dft = new DecimalFormat("###.##")
-    for (i <- 0 until size) {
-      val cloudlet: Cloudlet = list(i)
+    for (cloudlet <- list) {
       logger.info(indent + cloudlet.getCloudletId + indent + indent)
       if (cloudlet.getCloudletStatus == Cloudlet.SUCCESS) {
         logger.info("SUCCESS")
@@ -49,7 +52,7 @@ class DataCenterHelper {
     */
   def createDataCenter(name: String, hostParams: Map[String, Int], dataCenterParams: Map[String, Any]): Datacenter = {
 
-    val hostList: List[Host] = createNewHost(hostParams("hostID"), hostParams("ramSize"), hostParams("storage"), hostParams("bandWidth"), hostParams("mips")) :: Nil
+    val hostList: List[Host] = createNewHost(hostParams(conf.getString("hostKeys.id")), hostParams("ramSize"), hostParams("storage"), hostParams("bandWidth"), hostParams("mips")) :: Nil
 
     val mips: Int = hostParams("mips");
 
