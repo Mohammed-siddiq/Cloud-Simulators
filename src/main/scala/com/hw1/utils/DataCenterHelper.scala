@@ -36,11 +36,11 @@ class DataCenterHelper {
   val myUtil: ConversionUtil = new ConversionUtil();
 
 
-  private def createNewHost(myHostId: Int, ramSize: Int, storage: Int, bandWidth: Int, mips: Int): Host = {
+  private def createNewHost(host: SimulatedHost): Host = {
 
-    val peList: List[Pe] = List(new Pe(0, new PeProvisionerSimple(mips)))
+    val peList: List[Pe] = List(new Pe(0, new PeProvisionerSimple(host.mips)))
 
-    new Host(myHostId, new RamProvisionerSimple(ramSize), new BwProvisionerSimple(bandWidth), storage, myUtil.toJList(peList), new VmSchedulerTimeShared(myUtil.toJList(peList)))
+    new Host(host.id, new RamProvisionerSimple(host.ram), new BwProvisionerSimple(host.bw), host.storage, myUtil.toJList(peList), new VmSchedulerTimeShared(myUtil.toJList(peList)))
   }
 
   /**
@@ -50,22 +50,11 @@ class DataCenterHelper {
     * @param dataCenterParams : Map of string and Any defining the characteristics of a data Center
     * @return Datacenter
     */
-  def createDataCenter(name: String, hostParams: Map[String, Int], dataCenterParams: Map[String, Any]): Datacenter = {
+  def createDataCenter(name: String, host: SimulatedHost, sDataCenter: SimulatedDataCenter): Datacenter = {
 
-    val hostList: List[Host] = createNewHost(hostParams(conf.getString("hostKeys.id")), hostParams("ramSize"), hostParams("storage"), hostParams("bandWidth"), hostParams("mips")) :: Nil
+    val hostList: List[Host] = createNewHost(host) :: Nil
 
-    val mips: Int = hostParams("mips");
-
-    val arch: String = dataCenterParams("arch").toString
-    val os: String = dataCenterParams("os").toString
-    val vmm: String = dataCenterParams("vmm").toString
-
-    val timeZone: Double = dataCenterParams("timeZone").asInstanceOf[Double]
-    val cost: Double = dataCenterParams("cost").asInstanceOf[Double]
-    val costPerMem: Double = dataCenterParams("costPerMem").asInstanceOf[Double]
-    val costPerStorage: Double = dataCenterParams("costPerStorage").asInstanceOf[Double]
-    val costPerBw: Double = dataCenterParams("costPerBw").asInstanceOf[Double]
-    val characteristics = new DatacenterCharacteristics(arch, os, vmm, myUtil.toJList(hostList), timeZone, cost, costPerMem, costPerStorage, costPerBw)
+    val characteristics = new DatacenterCharacteristics(sDataCenter.arch, sDataCenter.os, sDataCenter.vmm, myUtil.toJList(hostList), sDataCenter.timeZone, sDataCenter.cost, sDataCenter.costPerMemory, sDataCenter.costPerStorage, sDataCenter.costPerBandWidth)
 
     var datacenter: Datacenter = null
     val storageList: List[Storage] = List();
