@@ -2,7 +2,7 @@ package com.hw1.simulations
 
 import java.util.Calendar
 
-import com.hw1.utils.{ConversionUtil, DataCenterHelper}
+import com.hw1.utils.{ConversionUtil, DataCenterHelper, SimulatedDataCenter, SimulatedHost}
 import org.cloudbus.cloudsim._
 import org.cloudbus.cloudsim.core.CloudSim
 import org.slf4j.{Logger, LoggerFactory}
@@ -15,8 +15,6 @@ object FirstSimulator extends App {
   val dataCenterHelper: DataCenterHelper = new DataCenterHelper();
   val myUtil: ConversionUtil = new ConversionUtil();
 
-  import com.typesafe.config.Config
-  import com.typesafe.config.ConfigFactory
 
   val conf = ConfigFactory.load("SimulationsProp")
 
@@ -32,10 +30,15 @@ object FirstSimulator extends App {
 
   logger.debug("Initialising cloudsim")
   CloudSim.init(numberOfUsers, calendar, traceFlag);
-  val hostParams: Map[String, Int] = Map(conf.getString("hostKeys.id") -> 1, "ramSize" -> 1024 * 2, "storage" -> 1000000, "bandWidth" -> 10000, "mips" -> 1000)
-  val dataCenterParams: Map[String, Any] = Map("arch" -> "x86", "os" -> "Linux", "vmm" -> "Xen", "timeZone" -> 10.0, "cost" -> 3.0, "costPerMem" -> 0.05, "costPerStorage" -> 0.001, "costPerBw" -> 0.0)
+//  val hostParams: Map[String, Int] = Map(conf.getString("hostKeys.id") -> 1, "ramSize" -> 1024 * 2, "storage" -> 1000000, "bandWidth" -> 10000, "mips" -> 1000)
+//  val dataCenterParams: Map[String, Any] = Map("arch" -> "x86", "os" -> "Linux", "vmm" -> "Xen", "timeZone" -> 10.0, "cost" -> 3.0, "costPerMem" -> 0.05, "costPerStorage" -> 0.001, "costPerBw" -> 0.0)
+  val host1:SimulatedHost = new SimulatedHost
+  host1.load(1,1)
 
-  val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", hostParams, dataCenterParams)
+  val dataCenter1:SimulatedDataCenter = new SimulatedDataCenter
+  dataCenter1.load(1,1)
+
+  val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", host1, dataCenter1)
   val dataCenterBroker: DatacenterBroker = dataCenterHelper.createBroker("First_Simulation_broker")
 
   val brokerId = dataCenterBroker.getId
