@@ -2,15 +2,15 @@ package com.hw1.utils
 
 import java.text.DecimalFormat
 
-import com.hw1.simulations.FirstSimulator
-import com.hw1.simulations.FirstSimulator.conf
+import com.hw1.simulations.FirstSimulation
+import com.hw1.simulations.FirstSimulation.conf
 import org.cloudbus.cloudsim._
 import org.cloudbus.cloudsim.provisioners.{BwProvisionerSimple, PeProvisionerSimple, RamProvisionerSimple}
 import org.slf4j.{Logger, LoggerFactory}
 
 class DataCenterHelper {
 
-  val logger: Logger = LoggerFactory.getLogger(FirstSimulator.getClass)
+  val logger: Logger = LoggerFactory.getLogger(FirstSimulation.getClass)
 
   def printCloudLets(list: List[Cloudlet]) = {
 
@@ -23,10 +23,12 @@ class DataCenterHelper {
 
     val dft = new DecimalFormat("###.##")
     for (cloudlet <- list) {
-      logger.info(indent + cloudlet.getCloudletId + indent + indent)
+//      logger.info(indent + cloudlet.getCloudletId + indent + indent)
       if (cloudlet.getCloudletStatus == Cloudlet.SUCCESS) {
-        logger.info("SUCCESS")
-        logger.info(indent + indent + cloudlet.getResourceId + indent + indent + indent + cloudlet.getVmId + indent + indent + dft.format(cloudlet.getActualCPUTime) + indent + indent + dft.format(cloudlet.getExecStartTime) + indent + indent + dft.format(cloudlet.getFinishTime))
+//        logger.info("SUCCESS")
+        logger.info(indent + cloudlet.getCloudletId + indent + indent + "SUCCESS" + indent + indent + cloudlet.getResourceId + indent +
+          indent + indent + cloudlet.getVmId + indent + indent + dft.format(cloudlet.getActualCPUTime) + indent + indent +
+          dft.format(cloudlet.getExecStartTime) + indent + indent + dft.format(cloudlet.getFinishTime))
       }
 
     }

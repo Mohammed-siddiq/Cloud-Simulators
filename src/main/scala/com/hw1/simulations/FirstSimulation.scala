@@ -9,7 +9,7 @@ import org.slf4j.{Logger, LoggerFactory}
 import com.typesafe.config.ConfigFactory
 
 
-object FirstSimulator extends App {
+object FirstSimulation extends App {
 
 
   val dataCenterHelper: DataCenterHelper = new DataCenterHelper();
@@ -27,7 +27,7 @@ object FirstSimulator extends App {
   val calendar: Calendar = Calendar.getInstance();
   val traceFlag: Boolean = false
 
-  logger.debug("Initialising cloudsim")
+  logger.info("Initialising cloudsim")
   CloudSim.init(numberOfUsers, calendar, traceFlag);
 
   val host1: SimulatedHost = new SimulatedHost(1, 1)
@@ -61,6 +61,8 @@ object FirstSimulator extends App {
 
 
   dataCenterHelper.printCloudLets(myUtil.toSList(dataCenterBroker.getCloudletReceivedList()))
+
+
 
 
 }
