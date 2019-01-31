@@ -70,7 +70,8 @@ class DataCenterHelper {
 
   }
 
-  def createVM(vmParams: Map[String, Any]) = new Vm(vmParams("vmId").asInstanceOf[Int], vmParams("brokerId").asInstanceOf[Int], vmParams("mips").asInstanceOf[Double], vmParams("pesNumber").asInstanceOf[Int], vmParams("ram").asInstanceOf[Int], vmParams("bw").asInstanceOf[Long], vmParams("size").asInstanceOf[Long], vmParams("vmm").asInstanceOf[String], new CloudletSchedulerTimeShared)
+  def createVM(simulatedVm: SimulatedVm) = new Vm(simulatedVm.vmId, simulatedVm.brokerID, simulatedVm.mips, simulatedVm.pesNumber,
+    simulatedVm.ram, simulatedVm.bandWith, simulatedVm.size, simulatedVm.vmm, new CloudletSchedulerTimeShared)
 
 
   def createBroker(brokerName: String): DatacenterBroker = {
@@ -78,8 +79,9 @@ class DataCenterHelper {
   }
 
 
-  def createCloudLet(cloudLetProps: Map[String, Int], utilizationModel: UtilizationModel): Cloudlet = {
-    val cloudlet = new Cloudlet(cloudLetProps("id"), cloudLetProps("length"), cloudLetProps("pesNumber"), cloudLetProps("fileSize"), cloudLetProps("outputSize"), utilizationModel, utilizationModel, utilizationModel)
+  def createCloudLet(simulatedCloudlet: SimulatedCloudlet, utilizationModel: UtilizationModel): Cloudlet = {
+    val cloudlet = new Cloudlet(simulatedCloudlet.id, simulatedCloudlet.length, simulatedCloudlet.pesNumber,
+      simulatedCloudlet.fileSize, simulatedCloudlet.fileSize, utilizationModel, utilizationModel, utilizationModel)
     cloudlet
   }
 

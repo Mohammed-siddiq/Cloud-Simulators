@@ -2,23 +2,18 @@ package com.hw1.utils
 
 import com.typesafe.config.ConfigFactory
 
+/**
+  * ReUsable host that can be simulated by providing the host values in the config file
+  *
+  */
+class SimulatedHost(which: Int, hostNumber: Int) {
 
-class SimulatedHost {
-
-  var id: Int = _
-  var ram: Int = _
-  var storage: Int = _
-  var bw: Int = _
-  var mips: Int = _
   val conf = ConfigFactory.load("SimulationValues")
-
-  def load(which: Int, hostNumber: Int) = {
-    val path = "simulation" + which + "." + "host" + hostNumber + "."
-    id = conf.getInt(path + "id")
-    ram = conf.getInt(path + "ram")
-    storage = conf.getInt(path + "storage")
-    bw = conf.getInt(path + "bw")
-    mips = conf.getInt(path + "mips")
-  }
+  val path = "simulation" + which + "." + "host" + hostNumber + "."
+  val id: Int = conf.getInt(path + "id")
+  val ram: Int = conf.getInt(path + "ram")
+  val storage: Int = conf.getInt(path + "storage")
+  val bw: Int = conf.getInt(path + "bw")
+  val mips: Int = conf.getInt(path + "mips")
 
 }

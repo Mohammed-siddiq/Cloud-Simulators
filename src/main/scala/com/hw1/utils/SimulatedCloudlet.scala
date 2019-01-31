@@ -2,23 +2,17 @@ package com.hw1.utils
 
 import com.typesafe.config.ConfigFactory
 
-class SimulatedCloudlet {
-  var id: Int = _
-  var length: Int = _
-  var fileSize: Int = _
-  var outPutSize: Int = _
-  var pesNumber: Int = _
+/**
+  * Re-usable cloudlet that can be simulated by providing the  values in the config file
+  *
+  */
+class SimulatedCloudlet(which: Int, number: Int) {
   val conf = ConfigFactory.load("SimulationValues")
-
-  def load(which: Int, number: Int) = {
-    val path = "simulation" + which + "." + "cloudLet" + number + "."
-    id = conf.getInt(path + "id")
-    length = conf.getInt(path + "length")
-    fileSize = conf.getInt(path + "fileSize")
-    outPutSize = conf.getInt(path + "outPutSize")
-    pesNumber = conf.getInt(path + "pesNumber")
-
-
-  }
+  val path = "simulation" + which + "." + "cloudLet" + number + "."
+  val id = conf.getInt(path + "id")
+  val length = conf.getInt(path + "length")
+  val fileSize = conf.getInt(path + "fileSize")
+  val outputSize = conf.getInt(path + "outputSize")
+  val pesNumber = conf.getInt(path + "pesNumber")
 
 }

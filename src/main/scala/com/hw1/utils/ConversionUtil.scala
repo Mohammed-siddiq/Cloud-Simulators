@@ -4,6 +4,10 @@ import java.util
 
 import scala.collection.mutable.ListBuffer
 
+/**
+  * Converts scala list to JAVA lists and vice-versa
+  *
+  */
 class ConversionUtil {
 
   def toJList[T](l: List[T]): util.List[T] = {

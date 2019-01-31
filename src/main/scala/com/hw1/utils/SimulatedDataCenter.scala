@@ -2,28 +2,25 @@ package com.hw1.utils
 
 import com.typesafe.config.ConfigFactory
 
-class SimulatedDataCenter {
-  var arch: String = _
-  var os: String = _
-  var vmm: String = _
-  var timeZone: Double = _
-  var cost: Double = _
-  var costPerMemory: Double = _
-  var costPerStorage: Double = _
-  var costPerBandWidth: Double = _
+
+/**
+  * Re-usable datacenter that can be simulated by providing the values in the config file
+  *
+  */
+class SimulatedDataCenter(which: Int, dataCenterNumber: Int) {
+
   val conf = ConfigFactory.load("SimulationValues")
+  val path = "simulation" + which + "." + "dataCenter" + dataCenterNumber + "."
 
-  def load(which: Int, dataCenterNumber: Int) = {
-    val path = "simulation" + which + "." + "host" + dataCenterNumber + "."
-    arch = conf.getString(path + "arch")
-    os = conf.getString(path + "os")
-    vmm = conf.getString(path + "vmm")
-    timeZone = conf.getDouble(path + "timeZone")
-    cost = conf.getDouble(path + "cost")
-    costPerMemory = conf.getDouble(path + "costPerMemory")
-    costPerStorage = conf.getDouble(path + "costPerStorage")
-    costPerBandWidth = conf.getDouble(path + "costPerBandWidth")
 
-  }
+  val arch = conf.getString(path + "arch")
+  val os = conf.getString(path + "os")
+  val vmm = conf.getString(path + "vmm")
+  val timeZone = conf.getDouble(path + "timeZone")
+  val cost = conf.getDouble(path + "cost")
+  val costPerMemory = conf.getDouble(path + "costPerMemory")
+  val costPerStorage = conf.getDouble(path + "costPerStorage")
+  val costPerBandWidth = conf.getDouble(path + "costPerBandWidth")
+
 
 }
