@@ -34,7 +34,7 @@ object ThirdSimulation extends App {
 
   val host1: SimulatedHost = new SimulatedHost(3, 1)
   val dataCenter1: SimulatedDataCenter = new SimulatedDataCenter(3, 1)
-  val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", host1, dataCenter1)
+  val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", host1 :: Nil, dataCenter1)
   val dataCenterBroker: DatacenterBroker = dataCenterHelper.createBroker("ThirdSimulationBroker")
 
   val brokerId = dataCenterBroker.getId
@@ -46,9 +46,9 @@ object ThirdSimulation extends App {
 
   //  vm2
 
-//  val sVm2: SimulatedVm = new SimulatedVm(2, 2)
-//  sVm2.brokerID = brokerId
-//  val vm2: Vm = dataCenterHelper.createVM(sVm2)
+  //  val sVm2: SimulatedVm = new SimulatedVm(2, 2)
+  //  sVm2.brokerID = brokerId
+  //  val vm2: Vm = dataCenterHelper.createVM(sVm2)
 
   val vmList: List[Vm] = List(vm1)
 

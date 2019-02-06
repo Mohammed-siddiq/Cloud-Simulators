@@ -3,10 +3,11 @@ package com.hw1.utils
 import java.text.DecimalFormat
 
 import com.hw1.simulations.FirstSimulation
-import com.hw1.simulations.FirstSimulation.conf
 import org.cloudbus.cloudsim._
 import org.cloudbus.cloudsim.provisioners.{BwProvisionerSimple, PeProvisionerSimple, RamProvisionerSimple}
 import org.slf4j.{Logger, LoggerFactory}
+
+import scala.collection.mutable.ListBuffer
 
 class DataCenterHelper {
 
@@ -23,9 +24,9 @@ class DataCenterHelper {
 
     val dft = new DecimalFormat("###.##")
     for (cloudlet <- list) {
-//      logger.info(indent + cloudlet.getCloudletId + indent + indent)
+      //      logger.info(indent + cloudlet.getCloudletId + indent + indent)
       if (cloudlet.getCloudletStatus == Cloudlet.SUCCESS) {
-//        logger.info("SUCCESS")
+        //        logger.info("SUCCESS")
         logger.info(indent + cloudlet.getCloudletId + indent + indent + "SUCCESS" + indent + indent + cloudlet.getResourceId + indent +
           indent + indent + cloudlet.getVmId + indent + indent + dft.format(cloudlet.getActualCPUTime) + indent + indent +
           dft.format(cloudlet.getExecStartTime) + indent + indent + dft.format(cloudlet.getFinishTime))
@@ -38,11 +39,16 @@ class DataCenterHelper {
   val myUtil: ConversionUtil = new ConversionUtil();
 
 
-  private def createNewHost(host: SimulatedHost): Host = {
+  def createNewHost(host: SimulatedHost): Host = {
 
-    val peList: List[Pe] = List(new Pe(0, new PeProvisionerSimple(host.mips)))
+    var peList = new ListBuffer[Pe]()
 
-    new Host(host.id, new RamProvisionerSimple(host.ram), new BwProvisionerSimple(host.bw), host.storage, myUtil.toJList(peList), new VmSchedulerTimeShared(myUtil.toJList(peList)))
+    for (i <- 0 until host.numberOfCores) peList += new Pe(i, new PeProvisionerSimple(host.mips))
+
+
+    //    val peList: List[Pe] = List(new Pe(0, new PeProvisionerSimple(host.mips)), new Pe(1, new PeProvisionerSimple(host.mips)))
+
+    new Host(host.id, new RamProvisionerSimple(host.ram), new BwProvisionerSimple(host.bw), host.storage, myUtil.toJList(peList.toList), new VmSchedulerTimeShared(myUtil.toJList(peList.toList)))
   }
 
   /**
@@ -52,16 +58,20 @@ class DataCenterHelper {
     * @param dataCenterParams : Map of string and Any defining the characteristics of a data Center
     * @return Datacenter
     */
-  def createDataCenter(name: String, host: SimulatedHost, sDataCenter: SimulatedDataCenter): Datacenter = {
+  def createDataCenter(name: String, simulatedHosts: List[SimulatedHost], sDataCenter: SimulatedDataCenter): Datacenter = {
 
-    val hostList: List[Host] = createNewHost(host) :: Nil
+    var hostList = new ListBuffer[Host]() // need to use var because list needs to be appended based on the passed param, had compromise in order to make this method generic
+    for (sHost <- simulatedHosts) {
+      hostList += createNewHost(sHost)
+    }
+    //    val hostList: List[Host] = createNewHost(host) :: Nil
 
-    val characteristics = new DatacenterCharacteristics(sDataCenter.arch, sDataCenter.os, sDataCenter.vmm, myUtil.toJList(hostList), sDataCenter.timeZone, sDataCenter.cost, sDataCenter.costPerMemory, sDataCenter.costPerStorage, sDataCenter.costPerBandWidth)
+    val characteristics = new DatacenterCharacteristics(sDataCenter.arch, sDataCenter.os, sDataCenter.vmm, myUtil.toJList(hostList.toList), sDataCenter.timeZone, sDataCenter.cost, sDataCenter.costPerMemory, sDataCenter.costPerStorage, sDataCenter.costPerBandWidth)
 
     var datacenter: Datacenter = null
-    val storageList: List[Storage] = List();
+    val storageList: List[Storage] = List()
     try {
-      datacenter = new Datacenter(name, characteristics, new VmAllocationPolicySimple(myUtil.toJList(hostList)), myUtil.toJList(storageList), 0)
+      datacenter = new Datacenter(name, characteristics, new VmAllocationPolicySimple(myUtil.toJList(hostList.toList)), myUtil.toJList(storageList), 0)
     }
     catch {
       case e: Exception =>

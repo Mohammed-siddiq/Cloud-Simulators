@@ -9,7 +9,7 @@ import com.typesafe.config.ConfigFactory
 class SimulatedCloudlet(which: Int, number: Int) {
   val conf = ConfigFactory.load("SimulationValues")
   val path = "simulation" + which + "." + "cloudLet" + number + "."
-  val id = conf.getInt(path + "id")
+  var id = conf.getInt(path + "id") //Id needs to be overwritten in order to avoid duplication of values in the conf
   val length = conf.getInt(path + "length")
   val fileSize = conf.getInt(path + "fileSize")
   val outputSize = conf.getInt(path + "outputSize")

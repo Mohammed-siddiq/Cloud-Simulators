@@ -33,7 +33,8 @@ object FirstSimulation extends App {
   val host1: SimulatedHost = new SimulatedHost(1, 1)
 
   val dataCenter1: SimulatedDataCenter = new SimulatedDataCenter(1, 1)
-  val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", host1, dataCenter1)
+
+  val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", host1 :: Nil, dataCenter1)
   val dataCenterBroker: DatacenterBroker = dataCenterHelper.createBroker("First_Simulation_broker")
 
   val brokerId = dataCenterBroker.getId
@@ -61,8 +62,6 @@ object FirstSimulation extends App {
 
 
   dataCenterHelper.printCloudLets(myUtil.toSList(dataCenterBroker.getCloudletReceivedList()))
-
-
 
 
 }

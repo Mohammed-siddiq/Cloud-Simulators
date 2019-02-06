@@ -10,7 +10,7 @@ class SimulatedVm(which: Int, vmNumber: Int) {
   var brokerID: Int = _ // needs to be variable since generated later
   val conf = ConfigFactory.load("SimulationValues")
   val path = "simulation" + which + "." + "vm" + vmNumber + "."
-  val vmId = conf.getInt(path + "vmId")
+  var vmId = conf.getInt(path + "vmId") // Needed to modify to avoid redundancy in the configuration values
   val mips = conf.getDouble(path + "mips")
   val size = conf.getInt(path + "size")
   val ram = conf.getInt(path + "ram")
