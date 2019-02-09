@@ -37,6 +37,8 @@ object FirstSimulation extends App {
   val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", host1 :: Nil, dataCenter1)
   val dataCenterBroker: DatacenterBroker = dataCenterHelper.createBroker("First_Simulation_broker")
 
+
+
   val brokerId = dataCenterBroker.getId
 
 
@@ -60,6 +62,8 @@ object FirstSimulation extends App {
   CloudSim.startSimulation()
 
   CloudSim.stopSimulation()
+
+  print("Sum " + cloudLetList.map(dataCenterHelper.getOverallCost).sum)
 
 
   dataCenterHelper.printCloudLets(myUtil.toSList(dataCenterBroker.getCloudletReceivedList()))

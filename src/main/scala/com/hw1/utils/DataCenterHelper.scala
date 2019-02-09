@@ -97,5 +97,19 @@ class DataCenterHelper {
     cloudlet
   }
 
+  def getOverallCost(cloudlet: Cloudlet): Double = {
+
+    var totalCost:Double = 0.0 // need to add the individual cost
+    if (cloudlet.isFinished) {
+      for (id <-cloudlet.getAllResourceId){
+        //        totalCost+= costPerSec * res.actualCPUTime
+        totalCost+= cloudlet.getCostPerSec(id) * cloudlet.getActualCPUTime(id)
+
+      }
+    }
+
+    totalCost
+  }
+
 
 }
