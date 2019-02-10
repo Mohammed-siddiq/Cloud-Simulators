@@ -39,7 +39,12 @@ object Simulation2SaaS {
     logger.info("Initialising")
     CloudSim.init(numberOfUsers, calendar, traceFlag);
 
+
+    //creating a simulated host through the configs
+
     val host1: SimulatedHost = new SimulatedHost(2, 1, "SaaS")
+
+    //creating a simulated Datacenter through the configs
 
     val dataCenter1: SimulatedDataCenter = new SimulatedDataCenter(2, 1, "SaaS")
 
@@ -50,6 +55,8 @@ object Simulation2SaaS {
     val brokerId = dataCenterBroker.getId
 
 
+    //creating a simulated VM through the configs
+
     val vm1: SimulatedVm = new SimulatedVm(2, 1, "SaaS")
     vm1.brokerID = brokerId
     val vm: Vm = dataCenterHelper.createVM(vm1)
@@ -57,6 +64,8 @@ object Simulation2SaaS {
 
     dataCenterBroker.submitVmList(myUtil.toJList(vmList))
 
+
+    //creating a cloudlet VM through the configs
 
     val cloudlet1: SimulatedCloudlet = new SimulatedCloudlet(2, 1, "SaaS")
 
@@ -67,12 +76,16 @@ object Simulation2SaaS {
     val cloudLetList: List[Cloudlet] = List(cloudLet)
     dataCenterBroker.submitCloudletList(myUtil.toJList(cloudLetList))
 
+    //starting simulation
     CloudSim.startSimulation()
 
+    //stopping simulation
     CloudSim.stopSimulation()
 
 
     dataCenterHelper.printCloudLets(myUtil.toSList(dataCenterBroker.getCloudletReceivedList()))
+
+    //calculating and printing the total cost incurred
     logger.info("OverallCost for this Saas  model: " + cloudLetList.map(dataCenterHelper.getOverallCost).sum)
   }
 }

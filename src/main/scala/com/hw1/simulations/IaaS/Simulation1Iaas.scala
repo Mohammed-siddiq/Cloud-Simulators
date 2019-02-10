@@ -139,26 +139,32 @@ object Simulation1Iaas {
     CloudSim.stopSimulation()
 
 
+    //Caluclating and printing the cost and the result of 1st Iaas
     dataCenterHelper.printCloudLets(myUtil.toSList(dataCenterBroker1.getCloudletReceivedList()))
     logger.info("OverallCost for this IaaS  model for 1st customer:" + cloudLetList1.map(dataCenterHelper.getOverallCost).sum)
 
 
+    //Caluclating and printing the cost and the result of 2nd Iaas
+
     dataCenterHelper.printCloudLets(myUtil.toSList(dataCenterBroker2.getCloudletReceivedList()))
     logger.info("OverallCost for this IaaS  model for 2nd customer: " + cloudLetList2.map(dataCenterHelper.getOverallCost).sum)
 
+    //Caluclating and printing the cost and the result of 3rd Iaas
 
     dataCenterHelper.printCloudLets(myUtil.toSList(dataCenterBroker3.getCloudletReceivedList()))
     logger.info("OverallCost for this IaaS  model for 3rd customer: " + cloudLetList3.map(dataCenterHelper.getOverallCost).sum)
 
+    //Caluclating and printing the cost and the result of 4th Iaas
 
     dataCenterHelper.printCloudLets(myUtil.toSList(dataCenterBroker4.getCloudletReceivedList()))
     logger.info("OverallCost for this IaaS  model for 4th customer: " + cloudLetList4.map(dataCenterHelper.getOverallCost).sum)
 
-
+    //Caluclating and printing the cost and the result of 5th Iaas
     dataCenterHelper.printCloudLets(myUtil.toSList(dataCenterBroker5.getCloudletReceivedList()))
     logger.info("OverallCost for this IaaS  model for 5th customer: " + cloudLetList5.map(dataCenterHelper.getOverallCost).sum)
 
 
   }
+
 
 }

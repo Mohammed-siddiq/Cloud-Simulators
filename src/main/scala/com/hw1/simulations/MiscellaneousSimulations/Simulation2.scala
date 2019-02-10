@@ -9,8 +9,9 @@ import org.cloudbus.cloudsim.core.CloudSim
 import org.slf4j.{Logger, LoggerFactory}
 
 /**
-  * Simulating: Different cloudlets on different VMS.
-  * Running multiple instances of the same cloudlet on multiple instances of same VMS
+  * Simulating: Different services on different VMS.
+  * Scenario simulated : Running multiple instances of the same software on multiple instances of same VMS.
+  * Refer 2nd simulation config under miscellaneous conf.
   */
 object Simulation2 {
 
@@ -34,14 +35,19 @@ object Simulation2 {
     logger.info("Initialising cloudsim")
     CloudSim.init(numberOfUsers, calendar, traceFlag);
 
+    //loading and creating hosts
     val host1: SimulatedHost = new SimulatedHost(2, 1, "Miscellaneous")
+
+    //loading datacenter confs
     val dataCenter1: SimulatedDataCenter = new SimulatedDataCenter(2, 1, "Miscellaneous")
+
+    //creating datacenter
     val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", host1 :: Nil, dataCenter1)
     val dataCenterBroker: DatacenterBroker = dataCenterHelper.createBroker("SecondSimulationBroker")
 
     val brokerId = dataCenterBroker.getId
 
-    // VM 1
+    //Loading and creating multiple vms with different configurations
     val sVm1: SimulatedVm = new SimulatedVm(2, 1, "Miscellaneous")
     sVm1.brokerID = brokerId
     val vm1: Vm = dataCenterHelper.createVM(sVm1)
@@ -71,17 +77,16 @@ object Simulation2 {
     val vm5: Vm = dataCenterHelper.createVM(sVm5)
 
 
-    //vm2
-
-    //  val sVm2: SimulatedVm = new SimulatedVm(2, 2)
-    //  sVm2.brokerID = brokerId
-    //  val vm2: Vm = dataCenterHelper.createVM(sVm2)
 
     val vmList: List[Vm] = List(vm1, vm2, vm3, vm4, vm5)
 
+
+    //sending created vms to datacenter
     dataCenterBroker.submitVmList(myUtil.toJList(vmList))
 
 
+
+    //loading different cloudlets form the conf
     val simCloudLet1: SimulatedCloudlet = new SimulatedCloudlet(1, 1, "Miscellaneous")
     val simCloudLet2: SimulatedCloudlet = new SimulatedCloudlet(1, 1, "Miscellaneous")
     simCloudLet2.id = simCloudLet1.id + 1
@@ -96,6 +101,7 @@ object Simulation2 {
     simCloudLet5.id = simCloudLet4.id + 1;
 
 
+    //creating cloudets from the loaded confs
     val cloudLet1: Cloudlet = dataCenterHelper.createCloudLet(simCloudLet1, new UtilizationModelFull)
     cloudLet1.setUserId(brokerId)
     cloudLet1.setVmId(sVm1.vmId)
@@ -117,12 +123,15 @@ object Simulation2 {
     cloudLet5.setVmId(sVm5.vmId)
 
 
+    // submitted the cloudlet list to the datacenter broker
     val cloudLetList: List[Cloudlet] = List(cloudLet1, cloudLet2, cloudLet3, cloudLet4, cloudLet5)
     dataCenterBroker.submitCloudletList(myUtil.toJList(cloudLetList))
 
     CloudSim.startSimulation()
     CloudSim.stopSimulation()
 
+
+    // calculating and printing total cost incurred and the results
 
     dataCenterHelper.printCloudLets(myUtil.toSList(dataCenterBroker.getCloudletReceivedList()))
 

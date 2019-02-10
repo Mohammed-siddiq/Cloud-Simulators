@@ -8,6 +8,8 @@
 
 
 **Simulations** :
+ 
+ A _small-scale simulation_ of few important models and few important common scenarios
 
 **Software as a Service (Saas)**: As the customer is unaware of the underlying hardware/resources , this simulation runs the exact same cloudlet(a service that runs continously - for a long time in the simulation). As a cloud broker, to find the right set of hardware/resources on which to run this software, couple of  ploicies are implemented with different VM's and different providers running the same cloudlets, thereby the right/optimal provider can be chosen to run the SaaS.
 

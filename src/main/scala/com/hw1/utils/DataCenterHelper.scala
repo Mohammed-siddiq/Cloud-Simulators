@@ -9,30 +9,14 @@ import org.slf4j.{Logger, LoggerFactory}
 
 import scala.collection.mutable.ListBuffer
 
+
+/**
+  * A generic class that can be invoked by the simulations.
+  * Creates all individual components of the Datacenter
+  */
 class DataCenterHelper {
 
   val logger: Logger = LoggerFactory.getLogger(Simulation1.getClass)
-
-  def printCloudLets(list: List[Cloudlet]) = {
-
-    Thread.sleep(1000)
-    val size = list.length
-
-    val indent = "    "
-    logger.info("*********** Simulation Result ***********")
-    logger.info("Cloudlet ID" + indent + "STATUS" + indent + "Data center ID" + indent + "VM ID" + indent + "Time" + indent + "Start Time" + indent + "Finish Time")
-
-    val dft = new DecimalFormat("###.##")
-    for (cloudlet <- list) {
-      if (cloudlet.getCloudletStatus == Cloudlet.SUCCESS) {
-        logger.info(indent + cloudlet.getCloudletId + indent + indent + "SUCCESS" + indent + indent + cloudlet.getResourceId + indent +
-          indent + indent + cloudlet.getVmId + indent + indent + dft.format(cloudlet.getActualCPUTime) + indent + indent +
-          dft.format(cloudlet.getExecStartTime) + indent + indent + dft.format(cloudlet.getFinishTime))
-      }
-
-    }
-  }
-
 
   val myUtil: ConversionUtil = new ConversionUtil();
 
@@ -62,7 +46,6 @@ class DataCenterHelper {
     for (sHost <- simulatedHosts) {
       hostList += createNewHost(sHost)
     }
-    //    val hostList: List[Host] = createNewHost(host) :: Nil
 
     val characteristics = new DatacenterCharacteristics(sDataCenter.arch, sDataCenter.os, sDataCenter.vmm, myUtil.toJList(hostList.toList), sDataCenter.timeZone, sDataCenter.cost, sDataCenter.costPerMemory, sDataCenter.costPerStorage, sDataCenter.costPerBandWidth)
 
@@ -110,6 +93,27 @@ class DataCenterHelper {
     }
 
     totalCost
+  }
+
+// prints the results of the cloudlets
+  def printCloudLets(list: List[Cloudlet]) = {
+
+    Thread.sleep(1000)
+    val size = list.length
+
+    val indent = "    "
+    logger.info("*********** Simulation Result ***********")
+    logger.info("Cloudlet ID" + indent + "STATUS" + indent + "Data center ID" + indent + "VM ID" + indent + "Time" + indent + "Start Time" + indent + "Finish Time")
+
+    val dft = new DecimalFormat("###.##")
+    for (cloudlet <- list) {
+      if (cloudlet.getCloudletStatus == Cloudlet.SUCCESS) {
+        logger.info(indent + cloudlet.getCloudletId + indent + indent + "SUCCESS" + indent + indent + cloudlet.getResourceId + indent +
+          indent + indent + cloudlet.getVmId + indent + indent + dft.format(cloudlet.getActualCPUTime) + indent + indent +
+          dft.format(cloudlet.getExecStartTime) + indent + indent + dft.format(cloudlet.getFinishTime))
+      }
+
+    }
   }
 
 

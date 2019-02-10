@@ -9,7 +9,9 @@ import org.cloudbus.cloudsim.core.CloudSim
 import org.slf4j.{Logger, LoggerFactory}
 
 /**
-  * Simulation with a dataCenter with one host one vm and 2 cloudlets running in parallel
+  * Simulation with a dataCenter with one host one vm and 2 cloudlets running in parallel,
+  * Scenario simulated: software that run and share the cpu time
+  * Refer 3rd simulation config under miscellaneous confs.
   *
   */
 
@@ -35,6 +37,7 @@ object Simulation3 {
     logger.info("Initialising cloudSim")
     CloudSim.init(numberOfUsers, calendar, traceFlag);
 
+    //loading and creating Datacenter and host from confs
     val host1: SimulatedHost = new SimulatedHost(3, 1, "Miscellaneous")
     val dataCenter1: SimulatedDataCenter = new SimulatedDataCenter(3, 1, "Miscellaneous")
     val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", host1 :: Nil, dataCenter1)
@@ -47,19 +50,21 @@ object Simulation3 {
     sVm1.brokerID = brokerId
     val vm1: Vm = dataCenterHelper.createVM(sVm1)
 
-    //  vm2
-
-    //  val sVm2: SimulatedVm = new SimulatedVm(2, 2)
-    //  sVm2.brokerID = brokerId
-    //  val vm2: Vm = dataCenterHelper.createVM(sVm2)
+ )
 
     val vmList: List[Vm] = List(vm1)
 
+    //sending created vms to datacenter
     dataCenterBroker.submitVmList(myUtil.toJList(vmList))
 
+    //loading different cloudlets form the conf
 
     val simCloudLet1: SimulatedCloudlet = new SimulatedCloudlet(3, 1, "Miscellaneous")
     val simCloudLet2: SimulatedCloudlet = new SimulatedCloudlet(3, 2, "Miscellaneous")
+
+
+
+    //creating cloudets from the loaded confs
 
     val cloudLet1: Cloudlet = dataCenterHelper.createCloudLet(simCloudLet1, new UtilizationModelFull)
     cloudLet1.setUserId(brokerId)
@@ -70,6 +75,10 @@ object Simulation3 {
     cloudLet2.setUserId(brokerId)
     cloudLet2.setVmId(sVm1.vmId)
 
+
+
+    // submitted the cloudlet list to the datacenter broker
+
     val cloudLetList: List[Cloudlet] = List(cloudLet1, cloudLet2)
     dataCenterBroker.submitCloudletList(myUtil.toJList(cloudLetList))
 
@@ -77,6 +86,7 @@ object Simulation3 {
     CloudSim.stopSimulation()
 
 
+    // calculating and printing total cost incurred and the results
     dataCenterHelper.printCloudLets(myUtil.toSList(dataCenterBroker.getCloudletReceivedList()))
 
     logger.info("Overall Cost for this simulation - " + cloudLetList.map(dataCenterHelper.getOverallCost).sum)
