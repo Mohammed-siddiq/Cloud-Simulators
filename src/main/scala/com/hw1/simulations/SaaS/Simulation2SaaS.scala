@@ -8,7 +8,16 @@ import org.cloudbus.cloudsim._
 import org.cloudbus.cloudsim.core.CloudSim
 import org.slf4j.{Logger, LoggerFactory}
 
-object Simulation2SaaS extends App {
+/**
+  * Software as a Service (Saas): As the customer is unaware of the underlying hardware/resources ,
+  * this simulation runs the exact same cloudlet(a service that runs continously - for a long time in the simulation).
+  * As a cloud broker, to find the right set of hardware/resources on which to run this software,
+  * couple of ploicies are implemented with different VM's and different providers running the same cloudlets,
+  * thereby the right/optimal provider can be chosen to run the SaaS.
+  *
+  * This is a second policy simulation for SaaS
+  */
+object Simulation2SaaS {
 
   def runSimulation = {
 
@@ -20,10 +29,10 @@ object Simulation2SaaS extends App {
 
     val logger: Logger = LoggerFactory.getLogger(this.getClass)
 
-    logger.info("Starting SaaS simulation's")
+    logger.info("Starting SaaS simulation 2")
 
 
-    val numberOfUsers: Int = 5000
+    val numberOfUsers: Int = 1
     val calendar: Calendar = Calendar.getInstance();
     val traceFlag: Boolean = false
 

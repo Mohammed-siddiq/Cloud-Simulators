@@ -2,7 +2,7 @@ package com.hw1.utils
 
 import java.text.DecimalFormat
 
-import com.hw1.simulations.FirstSimulation
+import com.hw1.simulations.MiscellaneousSimulations.Simulation1
 import org.cloudbus.cloudsim._
 import org.cloudbus.cloudsim.provisioners.{BwProvisionerSimple, PeProvisionerSimple, RamProvisionerSimple}
 import org.slf4j.{Logger, LoggerFactory}
@@ -11,22 +11,20 @@ import scala.collection.mutable.ListBuffer
 
 class DataCenterHelper {
 
-  val logger: Logger = LoggerFactory.getLogger(FirstSimulation.getClass)
+  val logger: Logger = LoggerFactory.getLogger(Simulation1.getClass)
 
   def printCloudLets(list: List[Cloudlet]) = {
 
+    Thread.sleep(1000)
     val size = list.length
 
     val indent = "    "
-    logger.info("")
-    logger.info("========== OUTPUT ==========")
+    logger.info("*********** Simulation Result ***********")
     logger.info("Cloudlet ID" + indent + "STATUS" + indent + "Data center ID" + indent + "VM ID" + indent + "Time" + indent + "Start Time" + indent + "Finish Time")
 
     val dft = new DecimalFormat("###.##")
     for (cloudlet <- list) {
-      //      logger.info(indent + cloudlet.getCloudletId + indent + indent)
       if (cloudlet.getCloudletStatus == Cloudlet.SUCCESS) {
-        //        logger.info("SUCCESS")
         logger.info(indent + cloudlet.getCloudletId + indent + indent + "SUCCESS" + indent + indent + cloudlet.getResourceId + indent +
           indent + indent + cloudlet.getVmId + indent + indent + dft.format(cloudlet.getActualCPUTime) + indent + indent +
           dft.format(cloudlet.getExecStartTime) + indent + indent + dft.format(cloudlet.getFinishTime))
@@ -102,11 +100,11 @@ class DataCenterHelper {
 
   def getOverallCost(cloudlet: Cloudlet): Double = {
 
-    var totalCost:Double = 0.0 // need to add the individual cost
+    var totalCost: Double = 0.0 // need to add the individual cost
     if (cloudlet.isFinished) {
-      for (id <-cloudlet.getAllResourceId){
+      for (id <- cloudlet.getAllResourceId) {
         //        totalCost+= costPerSec * res.actualCPUTime
-        totalCost+= cloudlet.getCostPerSec(id) * cloudlet.getActualCPUTime(id)
+        totalCost += cloudlet.getCostPerSec(id) * cloudlet.getActualCPUTime(id)
 
       }
     }
