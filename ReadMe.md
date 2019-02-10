@@ -11,7 +11,7 @@
  
  A _small-scale simulation_ of few important models and few important common scenarios
 
-**Software as a Service (Saas)**: As the customer is unaware of the underlying hardware/resources , this simulation runs the exact same cloudlet(a service that runs continously - for a long time in the simulation). As a cloud broker, to find the right set of hardware/resources on which to run this software, couple of  ploicies are implemented with different VM's and different providers running the same cloudlets, thereby the right/optimal provider can be chosen to run the SaaS.
+**Software as a Service (Saas)**: As the customer is unaware of the underlying hardware/resources , this simulation runs the exact same cloudlet(a service that runs continuously - for a long time in the simulation). As a cloud broker, to find the right set of hardware/resources on which to run this software, couple of policies are implemented with different VM's and different providers running the same cloudlets, thereby the right/optimal provider can be chosen to run the SaaS.
 
 
 **Important data center config** :  
@@ -47,7 +47,7 @@ dataCenter1 = {
      
  OverallCost for this Saas  model: 900.0
 
-  ```
+```
 dataCenter1 = {
     arch = "x86"
     os = "Linux"
@@ -58,7 +58,7 @@ dataCenter1 = {
     costPerStorage = 0.002
     costPerBandWidth = 0
   }
-vm1 = {
+  vm1 = {
     vmId = 1
     mips = 2000.00
     size = 10000
@@ -66,7 +66,7 @@ vm1 = {
     bandWith = 100
     pesNumber = 1
     vmm = "Vmware"
- }
+  }  
   ```
 
 
@@ -90,7 +90,7 @@ datacenter config: please refer the Iaas Conf file in the project.
 
 **Simulation Results**:
 
-The following describes the simulation results with various Infastractures.
+The following describes the simulation results with various Infrastructures.
 
 
  Cloudlet ID    STATUS    Data center ID    VM ID    Time    Start Time    Finish Time
@@ -118,7 +118,7 @@ Cloudlet ID    STATUS    Data center ID    VM ID    Time    Start Time    Finish
     5        SUCCESS        4            5        633.33        0.3        633.63
 OverallCost for this IaaS  model for 5th customer: 791.6666666666667
 
-**Conclusion** : A demonstration simulating 5 users owning different set of infrasture each running their own set of services was simulated. This gives a clarity on varied resources running varied servies thereby incurring varied costs. 
+**Conclusion** : A demonstration simulating 5 users owning different set of infrastructure each running their own set of services was simulated. This gives a clarity on varied resources running varied servies thereby incurring varied costs. 
 
 
 **Miscellaneous Simulations:**
