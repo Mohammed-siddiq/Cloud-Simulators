@@ -48,7 +48,7 @@ dataCenter1 = {
  OverallCost for this Saas  model: 900.0
 
   ```
-  dataCenter1 = {
+dataCenter1 = {
     arch = "x86"
     os = "Linux"
     vmm = "Vmware"
@@ -58,7 +58,7 @@ dataCenter1 = {
     costPerStorage = 0.002
     costPerBandWidth = 0
   }
-  vm1 = {
+vm1 = {
     vmId = 1
     mips = 2000.00
     size = 10000
@@ -66,9 +66,10 @@ dataCenter1 = {
     bandWith = 100
     pesNumber = 1
     vmm = "Vmware"
-  }
-  
-```
+ }
+  ```
+
+
 **Simulation Results** :
 
  Cloudlet ID    STATUS    Data center ID    VM ID    Time    Start Time    Finish Time
