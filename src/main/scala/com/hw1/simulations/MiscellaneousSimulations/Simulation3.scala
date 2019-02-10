@@ -42,15 +42,12 @@ object Simulation3 {
     val dataCenter1: SimulatedDataCenter = new SimulatedDataCenter(3, 1, "Miscellaneous")
     val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", host1 :: Nil, dataCenter1)
     val dataCenterBroker: DatacenterBroker = dataCenterHelper.createBroker("ThirdSimulationBroker")
-
     val brokerId = dataCenterBroker.getId
 
     // VM 1
     val sVm1: SimulatedVm = new SimulatedVm(3, 1, "Miscellaneous")
     sVm1.brokerID = brokerId
     val vm1: Vm = dataCenterHelper.createVM(sVm1)
-
- )
 
     val vmList: List[Vm] = List(vm1)
 
