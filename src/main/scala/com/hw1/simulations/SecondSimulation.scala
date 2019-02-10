@@ -31,37 +31,37 @@ object SecondSimulation extends App {
   logger.info("Initialising cloudsim")
   CloudSim.init(numberOfUsers, calendar, traceFlag);
 
-  val host1: SimulatedHost = new SimulatedHost(2, 1)
-  val dataCenter1: SimulatedDataCenter = new SimulatedDataCenter(2, 1)
+  val host1: SimulatedHost = new SimulatedHost(2, 1,"")
+  val dataCenter1: SimulatedDataCenter = new SimulatedDataCenter(2, 1,"")
   val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", host1 :: Nil, dataCenter1)
   val dataCenterBroker: DatacenterBroker = dataCenterHelper.createBroker("SecondSimulationBroker")
 
   val brokerId = dataCenterBroker.getId
 
   // VM 1
-  val sVm1: SimulatedVm = new SimulatedVm(2, 1)
+  val sVm1: SimulatedVm = new SimulatedVm(2, 1,"SimulationValues")
   sVm1.brokerID = brokerId
   val vm1: Vm = dataCenterHelper.createVM(sVm1)
 
 
-  val sVm2: SimulatedVm = new SimulatedVm(2, 1)
+  val sVm2: SimulatedVm = new SimulatedVm(2, 1,"SimulationValues")
   sVm2.brokerID = brokerId
   sVm2.vmId = sVm1.vmId + 1; // overwriting the id to create a different VM
   val vm2: Vm = dataCenterHelper.createVM(sVm2)
 
 
-  val sVm3: SimulatedVm = new SimulatedVm(2, 1)
+  val sVm3: SimulatedVm = new SimulatedVm(2, 1,"SimulationValues")
   sVm3.brokerID = brokerId
   sVm3.vmId = sVm2.vmId + 1;
   val vm3: Vm = dataCenterHelper.createVM(sVm3)
 
 
-  val sVm4: SimulatedVm = new SimulatedVm(2, 1)
+  val sVm4: SimulatedVm = new SimulatedVm(2, 1,"SimulationValues")
   sVm4.brokerID = brokerId
   sVm4.vmId = sVm3.vmId + 1;
   val vm4: Vm = dataCenterHelper.createVM(sVm4)
 
-  val sVm5: SimulatedVm = new SimulatedVm(2, 1)
+  val sVm5: SimulatedVm = new SimulatedVm(2, 1,"SimulationValues")
   sVm5.brokerID = brokerId
   sVm5.vmId = sVm4.vmId + 1;
 
@@ -79,17 +79,17 @@ object SecondSimulation extends App {
   dataCenterBroker.submitVmList(myUtil.toJList(vmList))
 
 
-  val simCloudLet1: SimulatedCloudlet = new SimulatedCloudlet(1, 1)
-  val simCloudLet2: SimulatedCloudlet = new SimulatedCloudlet(1, 1)
+  val simCloudLet1: SimulatedCloudlet = new SimulatedCloudlet(1, 1,"SimulationValues")
+  val simCloudLet2: SimulatedCloudlet = new SimulatedCloudlet(1, 1,"SimulationValues")
   simCloudLet2.id = simCloudLet1.id +1
 
-  val simCloudLet3: SimulatedCloudlet = new SimulatedCloudlet(1, 1)
+  val simCloudLet3: SimulatedCloudlet = new SimulatedCloudlet(1, 1,"SimulationValues")
   simCloudLet3.id = simCloudLet2.id + 1
 
-  val simCloudLet4: SimulatedCloudlet = new SimulatedCloudlet(1, 1)
+  val simCloudLet4: SimulatedCloudlet = new SimulatedCloudlet(1, 1,"SimulationValues")
   simCloudLet4.id = simCloudLet3.id + 1;
 
-  val simCloudLet5: SimulatedCloudlet = new SimulatedCloudlet(1, 1)
+  val simCloudLet5: SimulatedCloudlet = new SimulatedCloudlet(1, 1,"SimulationValues")
   simCloudLet5.id = simCloudLet4.id + 1;
 
 

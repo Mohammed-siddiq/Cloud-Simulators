@@ -32,15 +32,15 @@ object ThirdSimulation extends App {
   logger.info("Initialising cloudSim")
   CloudSim.init(numberOfUsers, calendar, traceFlag);
 
-  val host1: SimulatedHost = new SimulatedHost(3, 1)
-  val dataCenter1: SimulatedDataCenter = new SimulatedDataCenter(3, 1)
+  val host1: SimulatedHost = new SimulatedHost(3, 1,"SimulationValues")
+  val dataCenter1: SimulatedDataCenter = new SimulatedDataCenter(3, 1,"SimulationValues")
   val dataCenter: Datacenter = dataCenterHelper.createDataCenter("DataCenter1", host1 :: Nil, dataCenter1)
   val dataCenterBroker: DatacenterBroker = dataCenterHelper.createBroker("ThirdSimulationBroker")
 
   val brokerId = dataCenterBroker.getId
 
   // VM 1
-  val sVm1: SimulatedVm = new SimulatedVm(3, 1)
+  val sVm1: SimulatedVm = new SimulatedVm(3, 1,"SimulationValues")
   sVm1.brokerID = brokerId
   val vm1: Vm = dataCenterHelper.createVM(sVm1)
 
@@ -55,8 +55,8 @@ object ThirdSimulation extends App {
   dataCenterBroker.submitVmList(myUtil.toJList(vmList))
 
 
-  val simCloudLet1: SimulatedCloudlet = new SimulatedCloudlet(3, 1)
-  val simCloudLet2: SimulatedCloudlet = new SimulatedCloudlet(3, 2)
+  val simCloudLet1: SimulatedCloudlet = new SimulatedCloudlet(3, 1,"SimulationValues")
+  val simCloudLet2: SimulatedCloudlet = new SimulatedCloudlet(3, 2,"SimulationValues")
 
   val cloudLet1: Cloudlet = dataCenterHelper.createCloudLet(simCloudLet1, new UtilizationModelFull)
   cloudLet1.setUserId(brokerId)

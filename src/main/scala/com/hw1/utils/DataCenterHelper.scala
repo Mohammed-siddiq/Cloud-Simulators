@@ -97,6 +97,9 @@ class DataCenterHelper {
     cloudlet
   }
 
+
+  // calculates total cost incurred to run the cloudlet
+
   def getOverallCost(cloudlet: Cloudlet): Double = {
 
     var totalCost:Double = 0.0 // need to add the individual cost

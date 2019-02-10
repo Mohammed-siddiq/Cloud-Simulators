@@ -23,7 +23,7 @@ public class DataCenterHelperTest {
     public void verifyVmSimulation() {
 
         // Creating a simulated VM reading the configs
-        SimulatedVm simulatedVm = new SimulatedVm(1, 1);
+        SimulatedVm simulatedVm = new SimulatedVm(1, 1,"SimulationValues");
         Assert.assertNotNull(simulatedVm);
         Assert.assertEquals(simulatedVm.vmId(), 1);
 
@@ -38,7 +38,7 @@ public class DataCenterHelperTest {
     public void verifyHostSimulation() {
 
         // reading data from the simulation 1's host
-        SimulatedHost simulatedHost = new SimulatedHost(2, 1);
+        SimulatedHost simulatedHost = new SimulatedHost(2, 1,"SimulationValues");
         Assert.assertNotNull(simulatedHost);
         Assert.assertEquals(simulatedHost.id(), 0);
         Assert.assertEquals(simulatedHost.numberOfCores(), 1);
@@ -56,7 +56,7 @@ public class DataCenterHelperTest {
     public void verifyCloudLetSimulation() {
 
         // reading data from the simulation hosts
-        SimulatedCloudlet simulatedCloudlet = new SimulatedCloudlet(1, 1);
+        SimulatedCloudlet simulatedCloudlet = new SimulatedCloudlet(1, 1,"SimulationValues");
         Assert.assertNotNull(simulatedCloudlet);
         Assert.assertEquals(simulatedCloudlet.id(), 1);
 

@@ -6,10 +6,10 @@ import com.typesafe.config.ConfigFactory
   * ReUsable host that can be simulated by providing the host values in the config file
   *
   */
-class SimulatedHost(which: Int, hostNumber: Int) {
+class SimulatedHost(which: Int, hostNumber: Int, cloudModel:String) {
 
 
-  val conf = ConfigFactory.load("SimulationValues")
+  val conf = ConfigFactory.load(cloudModel)
   val path = "simulation" + which + "." + "host" + hostNumber + "."
   val id: Int = conf.getInt(path + "id")
   val ram: Int = conf.getInt(path + "ram")

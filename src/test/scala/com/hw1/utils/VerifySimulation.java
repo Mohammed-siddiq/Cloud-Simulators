@@ -36,14 +36,14 @@ public class VerifySimulation {
         CloudSim.init(1, calendar, false);
 
         //Add host to datacenter
-        SimulatedHost simulatedHost = new SimulatedHost(1, 1);
+        SimulatedHost simulatedHost = new SimulatedHost(1, 1,"SimulationValues");
         dch.createNewHost(simulatedHost);
 
         //Add Vm simulation
-        SimulatedVm simulatedVm = new SimulatedVm(1, 1);
+        SimulatedVm simulatedVm = new SimulatedVm(1, 1,"SimulationValues");
         ArrayList<Vm> vmList = new ArrayList<>();
         vmList.add(dch.createVM(simulatedVm));
-        simulatedVm = new SimulatedVm(2, 1);
+        simulatedVm = new SimulatedVm(2, 1,"SimulationValues");
         vmList.add(dch.createVM(simulatedVm));
 
 
@@ -54,13 +54,13 @@ public class VerifySimulation {
         testBroker.submitVmList(vmList); // submit vms to broker
 
         //Add cloudlet Simulation
-        SimulatedCloudlet simulatedCloudlet = new SimulatedCloudlet(1, 1);
+        SimulatedCloudlet simulatedCloudlet = new SimulatedCloudlet(1, 1,"SimulationValues");
         ArrayList<Cloudlet> cloudlets = new ArrayList<>();
 
         Cloudlet clouldlet1 = dch.createCloudLet(simulatedCloudlet, new UtilizationModelFull());
         clouldlet1.setUserId(1);
 
-        simulatedCloudlet = new SimulatedCloudlet(2, 1);
+        simulatedCloudlet = new SimulatedCloudlet(2, 1,"SimulationValues");
 
         Cloudlet clouldlet2 = dch.createCloudLet(simulatedCloudlet, new UtilizationModelFull());
         clouldlet2.setUserId(1);

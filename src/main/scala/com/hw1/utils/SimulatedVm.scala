@@ -6,9 +6,9 @@ import com.typesafe.config.ConfigFactory
   * Re-usable VM that can be simulated by providing the values in the config file
   *
   */
-class SimulatedVm(which: Int, vmNumber: Int) {
+class SimulatedVm(which: Int, vmNumber: Int,cloudModel:String) {
   var brokerID: Int = _ // needs to be variable since generated later
-  val conf = ConfigFactory.load("SimulationValues")
+  val conf = ConfigFactory.load(cloudModel)
   val path = "simulation" + which + "." + "vm" + vmNumber + "."
   var vmId = conf.getInt(path + "vmId") // Needed to modify to avoid redundancy in the configuration values
   val mips = conf.getDouble(path + "mips")

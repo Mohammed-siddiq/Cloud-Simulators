@@ -5,7 +5,7 @@ import java.util
 import scala.collection.mutable.ListBuffer
 
 /**
-  * Converts scala list to JAVA lists and vice-versa
+  * Util to perform data type conversion . ex : Converts scala list to JAVA lists and vice-versa
   *
   */
 class ConversionUtil {

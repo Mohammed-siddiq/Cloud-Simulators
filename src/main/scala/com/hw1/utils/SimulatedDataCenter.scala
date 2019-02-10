@@ -7,9 +7,9 @@ import com.typesafe.config.ConfigFactory
   * Re-usable datacenter that can be simulated by providing the values in the config file
   *
   */
-class SimulatedDataCenter(which: Int, dataCenterNumber: Int) {
+class SimulatedDataCenter(which: Int, dataCenterNumber: Int, cloudModel:String) {
 
-  val conf = ConfigFactory.load("SimulationValues")
+  val conf = ConfigFactory.load(cloudModel)
   val path = "simulation" + which + "." + "dataCenter" + dataCenterNumber + "."
 
 
