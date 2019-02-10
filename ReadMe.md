@@ -67,16 +67,19 @@ dataCenter1 = {
     pesNumber = 1
     vmm = "Vmware"
   }
+  
 ```
 **Simulation Results** :
+
  Cloudlet ID    STATUS    Data center ID    VM ID    Time    Start Time    Finish Time
      1        SUCCESS        2            1        450        0.1        450.1
+     
 OverallCost for this Saas  model: 1125.0
 
 
 **Conclusion**:
 
-Though tthe cost of using processing in the datacenter housing Xen vmware is 3.0$ it runs the simulation of our SaaS model incurring 900$ overall, while datacenter running Vmware's machine at cost of 2.5$ run's the same SaaS model at 1125$. For this SaaS model choosing the first datacenter would be  economical.
+Though the cost of using processing in the datacenter housing Xen vmware is 3.0$ it runs the simulation of our SaaS model incurring 900$ overall, while datacenter running Vmware's machine at cost of 2.5$ run's the same SaaS model at 1125$. For this SaaS model choosing the first datacenter would be  economical.
 
 
 
