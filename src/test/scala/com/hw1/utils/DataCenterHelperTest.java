@@ -5,6 +5,7 @@ import org.cloudbus.cloudsim.core.CloudSim;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import java.util.Calendar;
 
 
@@ -23,7 +24,7 @@ public class DataCenterHelperTest {
     public void verifyVmSimulation() {
 
         // Creating a simulated VM reading the configs
-        SimulatedVm simulatedVm = new SimulatedVm(1, 1,"SimulationValues");
+        SimulatedVm simulatedVm = new SimulatedVm(1, 1, "Miscellaneous");
         Assert.assertNotNull(simulatedVm);
         Assert.assertEquals(simulatedVm.vmId(), 1);
 
@@ -38,7 +39,7 @@ public class DataCenterHelperTest {
     public void verifyHostSimulation() {
 
         // reading data from the simulation 1's host
-        SimulatedHost simulatedHost = new SimulatedHost(2, 1,"SimulationValues");
+        SimulatedHost simulatedHost = new SimulatedHost(2, 1, "Miscellaneous");
         Assert.assertNotNull(simulatedHost);
         Assert.assertEquals(simulatedHost.id(), 0);
         Assert.assertEquals(simulatedHost.numberOfCores(), 1);
@@ -56,7 +57,7 @@ public class DataCenterHelperTest {
     public void verifyCloudLetSimulation() {
 
         // reading data from the simulation hosts
-        SimulatedCloudlet simulatedCloudlet = new SimulatedCloudlet(1, 1,"SimulationValues");
+        SimulatedCloudlet simulatedCloudlet = new SimulatedCloudlet(1, 1, "Miscellaneous");
         Assert.assertNotNull(simulatedCloudlet);
         Assert.assertEquals(simulatedCloudlet.id(), 1);
 
@@ -81,7 +82,6 @@ public class DataCenterHelperTest {
 
 
     }
-
 
 
 }
