@@ -1,5 +1,6 @@
+## Overview
 
-**Name: Mohammed Siddiq**
+Experimented with creating cloud computing datacenters and running jobs on them using a cloud simulator, a software package that models the cloud environments and operates different cloud models. Used  *CloudSim*, framework and a set of libraries for modeling and simulating cloud computing infrastructure and services. It is a [publically available project in Github](https://github.com/Cloudslab/cloudsim).
 
 **Steps to run:**
 1. Clone this project 
